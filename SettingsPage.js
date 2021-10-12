@@ -64,7 +64,6 @@ const App = ({ queryParams, setQueryParams, setPage }) => {
     }
 
     function handlePageChange() {
-      console.log("PAGE COCTAIL")
       setPage('coctail');
     }
 

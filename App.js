@@ -29,9 +29,7 @@ export default function App() {
   async function getCoctails() {
     try {
       const res = await fetch(`http://192.168.0.10:8000/?${new URLSearchParams(queryParams).toString()}`);
-      // const res = await fetch('https://newtone-kursy.herokuapp.com/api/users/');
       const data = await res.json();
-      console.log("GET COCTAILS")
       setCoctails(data);
     } catch (err) {
       console.log(err);
@@ -39,7 +37,6 @@ export default function App() {
   }
 
   useEffect(() => {
-    console.log("USE EFFECT APP")
     getCoctails();
   }, [queryParams])
 
@@ -53,22 +50,9 @@ export default function App() {
               setPage={setPage} />
         : <CoctailPage 
               coctails={coctails} 
-              setCoctails={setCoctails}
               setPage={setPage}
-              page={page} />
+              setQueryParams={setQueryParams} />
         }
-
-      {/* {coctails && coctails.length > 0 
-          ? coctails.slice(0, 10).map( (coctail, index) => {
-            return (
-              <View key={index}>
-              <Text>{coctail.name}</Text>
-              </View>
-              )
-            
-            })
-          : <Text>Loading...</Text>
-      } */}
 
       <ExpoBar style="auto" />
     </SafeAreaView>
@@ -79,7 +63,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    // justifyContent: 'center',
     backgroundColor: COLORS.SHUTTLE_GREY,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
   },

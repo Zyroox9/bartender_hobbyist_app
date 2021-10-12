@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, View, Button, TextInput } from 'react-native';
 
 import CoctailCard from './CoctailCard';
 
@@ -15,7 +15,7 @@ const COLORS = {
   SHUTTLE_GREY: '#565E67'
 }
 
-export default function CoctailPage({ coctails, setPage }) {
+export default function CoctailPage({ coctails, setPage, setQueryParams }) {
   const [search, setSearch] = useState('')
   const [coctailsFiltered, setCoctailsFiltered] = useState(null)
   const [randomCoctail, setRandomCoctail] = useState(null)
@@ -31,25 +31,36 @@ export default function CoctailPage({ coctails, setPage }) {
   }, [coctailsFiltered])
 
 
-
   function handlePageChange() {
-    console.log("PAGE SETTINGS")
+    setQueryParams({
+      available: false,
+      style: '',
+      ingredient: ''
+    })
     setPage('settings');
   }
 
   function handleSearch(value) {
-    console.log(value)
     setSearch(value);
   }
 
   function getRandomCoctail() {
-    console.log("GET RANDOM COCTAIL")
-    coctailsFiltered && coctailsFiltered.length > 0
-      && setRandomCoctail(coctailsFiltered[Math.floor(Math.random()*coctailsFiltered.length)])
+    if (coctailsFiltered && coctailsFiltered.length > 0) {
+    let i = 0;
+    let newRandom = {};
+    while (true) {
+      newRandom = coctailsFiltered[Math.floor(Math.random()*coctailsFiltered.length)];
+      i++;
+      if (newRandom != randomCoctail || i > 50) {
+        break;
+      }
+    }
+
+    setRandomCoctail(newRandom)
+  }
   }
 
   function filterCoctails() {
-    console.log("FILTER COCTAILS")
     coctails && coctails.length > 0 
     && setCoctailsFiltered(coctails.filter( coctail =>  
       { return search === ''
@@ -117,7 +128,6 @@ const styles = StyleSheet.create({
     flex: 15,
     borderRadius: 10,
     padding: 20,
-    // width: '100%',
     marginTop: 15,
     marginBottom: 15,
     backgroundColor: COLORS.HEATHER
