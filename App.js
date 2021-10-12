@@ -1,13 +1,53 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, SafeAreaView, View } from 'react-native';
+
+// import CoctailCard from './CoctailCard';
+import SettingsPage from './SettingsPage';
 
 export default function App() {
+  const [coctails, setCoctails] = useState({});
+  const [queryParams, setQueryParams] = useState({
+    available: false,
+    style: '',
+    ingredient: ''
+  });
+
+  async function getCoctails() {
+    try {
+      const res = await fetch(`http://192.168.0.10:8000/?${new URLSearchParams(queryParams).toString()}`);
+      // const res = await fetch('https://newtone-kursy.herokuapp.com/api/users/');
+      const data = await res.json();
+  
+      setCoctails(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getCoctails();
+  }, [queryParams])
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <SafeAreaView style={styles.container}>
+      <SettingsPage queryParams={queryParams} setQueryParams={setQueryParams} />
+
+
+      {coctails && coctails.length > 0 
+          ? coctails.slice(0, 10).map( (coctail, index) => {
+            return (
+              <View key={index}>
+              <Text>{coctail.name}</Text>
+              </View>
+              )
+            
+            })
+          : <Text>Loading...</Text>
+      }
+
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
