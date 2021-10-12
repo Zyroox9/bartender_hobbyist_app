@@ -1,6 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar as ExpoBar }  from 'expo-status-bar' ;
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, SafeAreaView, View } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, Platform, StatusBar } from 'react-native';
 
 // import CoctailCard from './CoctailCard';
 import SettingsPage from './SettingsPage';
@@ -34,7 +34,7 @@ export default function App() {
       <SettingsPage queryParams={queryParams} setQueryParams={setQueryParams} />
 
 
-      {coctails && coctails.length > 0 
+      {/* {coctails && coctails.length > 0 
           ? coctails.slice(0, 10).map( (coctail, index) => {
             return (
               <View key={index}>
@@ -44,9 +44,9 @@ export default function App() {
             
             })
           : <Text>Loading...</Text>
-      }
+      } */}
 
-      <StatusBar style="auto" />
+      <ExpoBar style="auto" />
     </SafeAreaView>
   );
 }
@@ -57,5 +57,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
   },
 });

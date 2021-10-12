@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { View, Switch, StyleSheet } from "react-native";
+import { View, Switch, StyleSheet, Button, Alert, Text } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
+
+const COLORS = {
+  WHITE: '#fff',
+  BLACK: '#000',
+  ALTO: '#dfdfdf',
+  GREY: '#808080',
+  EBONY_CLAY: '#292d3e',
+  HEATHER: '#bfc7d5',
+  LYNCH: '#697098',
+  SHARK: '#242526',
+  SHUTTLE_GREY: '#565E67'
+}
 
 const App = ({ queryParams, setQueryParams }) => {
     const toggleSwitch = () => setQueryParams({...queryParams, available: !queryParams.available});
@@ -53,15 +65,42 @@ const App = ({ queryParams, setQueryParams }) => {
 
     return (
         <View style={styles.container}>
-        <Switch
-            trackColor={{ false: "#767577", true: "#81b0ff" }}
-            thumbColor={queryParams.available ? "#f5dd4b" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch}
-            value={queryParams.available}
-        />
 
+        <View style={styles.switch}>
+          <Text style={styles.label}>Only available coctails</Text>
+          <Switch
+              trackColor={{ false: "#767577", true: COLORS.HEATHER }}
+              thumbColor={queryParams.available ? COLORS.EBONY_CLAY : "#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitch}
+              value={queryParams.available}
+          />
+        </View>
+
+        <View style={styles.dropdown}>
+          <Text style={styles.label}>Ingredient</Text>
+          <DropDownPicker
+              zIndex={6000}
+              maxHeight={350}
+              theme="DARK"
+              schema={{ label: 'name', value: 'id' }}
+              searchable={true}
+              searchPlaceholder="Search ingredient..."
+              placeholder="Any"
+              open={openIngredient}
+              value={valueIngredient}
+              items={itemsIngredient}
+              setOpen={setOpenIngredient}
+              setValue={setValueIngredient}
+              setItems={setItemsIngredient}
+              onChangeValue={handleIngredientChange}
+              />
+          </View>
+
+        <View style={styles.dropdown}>
+        <Text style={styles.label}>Coctail style</Text>
         <DropDownPicker
+            theme="DARK"
             placeholder="Any"
             open={openStyle}
             value={valueStyle}
@@ -71,29 +110,47 @@ const App = ({ queryParams, setQueryParams }) => {
             setItems={setItemsStyle}
             onChangeValue={handleStyleChange}
             />
+        </View>   
 
-        <DropDownPicker
-            schema={{ label: 'name', value: 'id' }}
-            searchable={true}
-            searchPlaceholder="Search ingredient..."
-            placeholder="Any"
-            open={openIngredient}
-            value={valueIngredient}
-            items={itemsIngredient}
-            setOpen={setOpenIngredient}
-            setValue={setValueIngredient}
-            setItems={setItemsIngredient}
-            onChangeValue={handleIngredientChange}
-            /> 
+          <View style={styles.button}>
+            <Button 
+              title="Let's go!"
+              color={COLORS.EBONY_CLAY}
+              onPress={() => Alert.alert('Simple Button pressed')}
+            ></Button>
+          </View>
         </View>
     );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    padding: 40,
+    backgroundColor: COLORS.SHUTTLE_GREY,
+  },
+  label: {
+    fontSize: 24,
+    marginBottom: 14,
+    color: COLORS.WHITE
+  },
+  switch: {
+    alignItems: "center",
+    flex: 1,
     justifyContent: "center"
+  },
+  dropdown: {
+    alignItems: "center",
+    flex: 1,
+    justifyContent: "center"
+  },
+  button: {
+    flex: 1,
+    justifyContent: "center",
+    zIndex: 4000
   }
 });
 
