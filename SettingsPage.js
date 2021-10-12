@@ -14,7 +14,7 @@ const COLORS = {
   SHUTTLE_GREY: '#565E67'
 }
 
-const App = ({ queryParams, setQueryParams }) => {
+const App = ({ queryParams, setQueryParams, setPage }) => {
     const toggleSwitch = () => setQueryParams({...queryParams, available: !queryParams.available});
     const [openStyle, setOpenStyle] = useState(false);
     const [valueStyle, setValueStyle] = useState(null);
@@ -61,6 +61,11 @@ const App = ({ queryParams, setQueryParams }) => {
 
     function handleIngredientChange(value) {
         setQueryParams({...queryParams, ingredient: value}) 
+    }
+
+    function handlePageChange() {
+      console.log("PAGE COCTAIL")
+      setPage('coctail');
     }
 
     return (
@@ -116,7 +121,7 @@ const App = ({ queryParams, setQueryParams }) => {
             <Button 
               title="Let's go!"
               color={COLORS.EBONY_CLAY}
-              onPress={() => Alert.alert('Simple Button pressed')}
+              onPress={handlePageChange}
             ></Button>
           </View>
         </View>
@@ -150,7 +155,7 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     justifyContent: "center",
-    zIndex: 4000
+    zIndex: 4000,
   }
 });
 
