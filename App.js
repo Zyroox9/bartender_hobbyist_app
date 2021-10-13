@@ -1,3 +1,5 @@
+// Dodać alert, jeśli i>50 czyli nie ma więcej drinków w tym wyszukiwaniu
+
 import { StatusBar as ExpoBar }  from 'expo-status-bar' ;
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, SafeAreaView, Platform, StatusBar } from 'react-native';
