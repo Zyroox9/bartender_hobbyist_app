@@ -6,7 +6,7 @@ Architecture is: API hosted on localhost, mobile app fetching API and doing its 
 
 You can filter cocktails by availability (based on which ingredients are marked 'available' in your db), style, name and ingredients
 
-![filter](https://user-images.githubusercontent.com/80787886/137136500-5c0eced6-cc23-4543-8bb1-83e2fc89861d.jpg)
-![dropdown](https://user-images.githubusercontent.com/80787886/137136499-e26c4410-bc58-48da-a057-e40c8954c83d.jpg)
-![daiquiri](https://user-images.githubusercontent.com/80787886/137136488-6d518a0d-1919-4351-85ff-b80acf623c94.jpg)
-![gin_basil_smash](https://user-images.githubusercontent.com/80787886/137136505-a70ab249-c32a-47c2-81ab-95aaa63564ba.jpg)
+![filter](https://user-images.githubusercontent.com/80787886/137136784-df8630a1-20e9-46b7-b629-cbdc05c6c6ae.jpg)
+![dropdown](https://user-images.githubusercontent.com/80787886/137136781-55111b55-8690-4a5d-b26f-90560b8007a1.jpg)
+![daiquiri](https://user-images.githubusercontent.com/80787886/137136765-0f96fc31-3425-4d34-a723-6f97d421cc96.jpg)
+![gin_basil_smash](https://user-images.githubusercontent.com/80787886/137136785-7bdc0911-5acc-4742-8bad-d52c652e1ec3.jpg)
